@@ -1,11 +1,11 @@
 # Get Android Notifications
 
-## 1. Download Android Debug Bride(ADB)
-- Download ADB: [https://developer.android.com/studio/releases/platform-tools](https://developer.android.com/studio/releases/platform-tools)
+1. Download Android Debug Bride(ADB)
+    - Download ADB: [https://developer.android.com/studio/releases/platform-tools](https://developer.android.com/studio/releases/platform-tools)
 
-## 2. Set ADB to your system environment variable
+2. Set ADB to your system environment variable
 
-## 3. Enjoy
+3. Enjoy
 ```
 notifications = Android_Notifications()
 
