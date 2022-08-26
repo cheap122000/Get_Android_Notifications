@@ -23,13 +23,15 @@ class Android_Notifications:
             for l in n_logs[0].split(" "):
                 if l.startswith("pkg="):
                     pkg = l[4:]
-                    self.notifications[pkg] = []
+                    if not self.notifications.get(pkg):
+                        self.notifications[pkg] = []
 
             if pkg:
                 for log in n_logs:
                     line = log.strip()
                     if line.startswith("android.text="):
-                        self.notifications[pkg]= [line[line.find("(")+1:-1]]
+                        if "String" in line:
+                            self.notifications[pkg].append(line[line.find("(")+1:-1])
                     if line.startswith("android.messages=Parcelable[]"):
                         self.notifications[pkg] = []
                     if "Bundle[{" in line:
@@ -47,8 +49,10 @@ class Android_Notifications:
 
 if __name__ == "__main__":
     notifications = Android_Notifications()
-    print(notifications.get_notifications())
+    # print(notifications.get_notifications())
     smss = notifications.get_sms()
     test = notifications.get_notification_by_pakage_name("com.facebook.orca")
-    print(smss)
-    print(test)
+    # print(smss)
+    # print(test)
+    import json
+    print(json.dumps(notifications.get_notifications(), ensure_ascii=False, indent=4))
