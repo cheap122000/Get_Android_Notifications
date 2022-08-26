@@ -10,7 +10,7 @@
 notifications = Android_Notifications()
 
 # show all notifications
-print(notifications.notifications)
+print(notifications.get_notifications())
 
 # if you only want to get sms messages
 sms = notifications.get_sms()

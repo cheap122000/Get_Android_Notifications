@@ -35,6 +35,8 @@ class Android_Notifications:
                     if "Bundle[{" in line:
                         self.notifications[pkg].append(line[line.find(", text")+7:-22])
 
+        return self.notifications
+
     def get_sms(self):
         self.get_notifications()
         return self.notifications["com.google.android.apps.messaging"]
@@ -45,8 +47,8 @@ class Android_Notifications:
 
 if __name__ == "__main__":
     notifications = Android_Notifications()
+    print(notifications.get_notifications())
     smss = notifications.get_sms()
     test = notifications.get_notification_by_pakage_name("com.facebook.orca")
     print(smss)
     print(test)
-    print(notifications.notifications)
