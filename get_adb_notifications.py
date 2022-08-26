@@ -3,6 +3,9 @@ import os
 
 class Android_Notifications:
     def __init__(self):
+        self.notifications = {}
+
+    def get_notifications(self):
         temp_path = "./sms.txt"
         subprocess.getoutput(f'adb shell dumpsys notification --noredact > {temp_path}')
         notification_logs = None
@@ -33,15 +36,17 @@ class Android_Notifications:
                         self.notifications[pkg].append(line[line.find(", text")+7:-22])
 
     def get_sms(self):
+        self.get_notifications()
         return self.notifications["com.google.android.apps.messaging"]
 
     def get_notification_by_pakage_name(self, pkg_name: str):
+        self.get_notifications()
         return self.notifications[pkg_name]
 
 if __name__ == "__main__":
     notifications = Android_Notifications()
-    print(notifications.notifications)
     smss = notifications.get_sms()
     test = notifications.get_notification_by_pakage_name("com.facebook.orca")
     print(smss)
     print(test)
+    print(notifications.notifications)
