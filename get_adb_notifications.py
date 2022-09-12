@@ -32,8 +32,13 @@ class Android_Notifications:
                     if line.startswith("android.text="):
                         if "String" in line:
                             self.notifications[pkg].append(line[line.find("(")+1:-1])
+                    if line.startswith("android.bigText="):
+                        if "String" in line:
+                            self.notifications[pkg] = []
+                            self.notifications[pkg].append(line[line.find("(")+1:-1])
                     if line.startswith("android.messages=Parcelable[]"):
-                        self.notifications[pkg] = []
+                        if not self.notifications.get(pkg):
+                            self.notifications[pkg] = []
                     if "Bundle[{" in line:
                         self.notifications[pkg].append(line[line.find(", text")+7:-22])
 
