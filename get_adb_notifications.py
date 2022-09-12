@@ -48,7 +48,6 @@ class Android_Notifications:
 
 if __name__ == "__main__":
     notifications = Android_Notifications()
-    # print(notifications.get_notifications())
     smss = notifications.get_sms()
     test = notifications.get_notification_by_pakage_name("com.facebook.orca")
     print(smss)
